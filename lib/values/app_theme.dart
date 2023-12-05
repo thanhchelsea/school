@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:school_manager/values/padding.dart';
 import '../tools/text_style.dart';
 import 'app_colors.dart';
 
@@ -28,6 +30,7 @@ class AppThemes {
       iconTheme: baseTheme.iconTheme.copyWith(
         color: Colors.black,
       ),
+      checkboxTheme: CheckboxThemeData(),
       scaffoldBackgroundColor: AppColors.background,
       dividerTheme: const DividerThemeData(
         thickness: 1.0,
@@ -52,6 +55,33 @@ class AppThemes {
       cardTheme: baseTheme.cardTheme.copyWith(
         elevation: 0.0,
         shadowColor: Colors.black12,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.white,
+        isDense: true,
+        hintStyle: TextStyle(fontSize: 12),
+        contentPadding: EdgeInsets.symmetric(horizontal: padding12, vertical: padding),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(GetPlatform.isAndroid || GetPlatform.isIOS ? 12 : 8),
+          borderSide: const BorderSide(color: AppColors.primary),
+          gapPadding: 30.0,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(GetPlatform.isAndroid || GetPlatform.isIOS ? 12 : 8),
+          borderSide: const BorderSide(color: AppColors.error),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(GetPlatform.isAndroid || GetPlatform.isIOS ? 12 : 8),
+          borderSide: const BorderSide(color: Colors.transparent),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(GetPlatform.isAndroid || GetPlatform.isIOS ? 12 : 8),
+          borderSide: const BorderSide(color: AppColors.error),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(GetPlatform.isAndroid || GetPlatform.isIOS ? 12 : 8),
+          borderSide: BorderSide(color: AppColors.primary.withOpacity(0.2)),
+        ),
       ),
     );
   }

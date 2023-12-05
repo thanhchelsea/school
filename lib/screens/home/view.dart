@@ -17,7 +17,6 @@ class HomeUI extends BaseView<HomeController> {
     return Center(
       child: Text(
         "Home",
-        style: getTextTheme(TextSystem.bodyLarge, context),
       ),
     );
   }

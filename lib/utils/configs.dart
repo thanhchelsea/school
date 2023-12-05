@@ -1,4 +1,5 @@
 class AppConfigs {
+  static const String appName = "PuSchool";
   //logic app
   static const String courseIdSpeaking = "5112644562321408";
   static const int LOGIN_FAILED = -1;

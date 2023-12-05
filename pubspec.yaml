@@ -20,6 +20,7 @@ dependencies:
   path_provider: ^2.0.11
   pretty_dio_logger: ^1.1.1
   fluttertoast: ^8.0.9
+  flutter_svg: ^0.22.0
 
 
 
@@ -29,5 +30,20 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/images/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/SVN-Poppins-Black.ttf
+        - asset: assets/fonts/poppins/SVN-Poppins-Bold.ttf
+        - asset: assets/fonts/poppins/SVN-Poppins-Light.ttf
+        - asset: assets/fonts/poppins/SVN-Poppins-Medium.ttf
+        - asset: assets/fonts/poppins/SVN-Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/SVN-Poppins-SemiBold.ttf
+    - family: icons
+      fonts:
+        - asset: assets/fonts/icons/AppIcons.ttf

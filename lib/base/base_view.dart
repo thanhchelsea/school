@@ -73,7 +73,7 @@ abstract class BaseView<Controller extends BaseController> extends GetView<Contr
   }
 
   Color pageBackgroundColor() {
-    return Colors.white;
+    return Get.theme.colorScheme.background;
   }
 
   Color statusBarColor() {
