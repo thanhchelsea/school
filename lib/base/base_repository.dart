@@ -15,6 +15,7 @@ class BaseRepository {
       {bool? testMode = false, bool checkStatus = true, bool loginApi = false}) async {
     try {
       Response<T> response = await api;
+      // print("======= ${response.data}");
       if (testMode != null && testMode) {
         return response;
       }
@@ -27,13 +28,8 @@ class BaseRepository {
         int status = (response.data as Map<String, dynamic>)['status'] as int;
         if (status != AppConfigs.SUCCESS && checkStatus == true) {
           String statusMessage = ClientUltis.convertStatus(status);
-          throw handleError(statusMessage);
+          throw handleError((response.data as Map<String, dynamic>)['message']);
         }
-        // if (loginApi) {
-        //   int userStatus = (response.data as Map<String, dynamic>)['status'];
-        //   String statusMessage2 = ClientUltis.convertStatus(userStatus);
-        //   throw handleError(statusMessage2);
-        // }
       }
       return response;
     } on DioError catch (dioError) {

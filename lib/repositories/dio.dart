@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiConfig {
-  static const apiEndPoint = "https://toeic-dot-comaiphuong-edu.appspot.com/api/app";
-  static const base_es_server = 'https://test-toeic.online:1443/api';
+  static const apiEndPoint = "https://7f07-2402-800-6105-bc23-9957-33a2-a75f-4e4d.ngrok-free.app/api/app/";
   static const TOKEN = "LAQaifUvHUWMCln8ve0VmnVaMCQrKIZS";
 }
 

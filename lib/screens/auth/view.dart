@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:school_manager/base/index.dart';
 import 'package:school_manager/screens/auth/controller.dart';
 import 'package:school_manager/tools/text_style.dart';
@@ -32,7 +33,9 @@ class AuthUI extends BaseView<AuthController> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(flex: 5, child: _renderDescriptionImage()),
+          ResponsiveBreakpoints.of(context).smallerThan(TABLET)
+              ? Container()
+              : Expanded(flex: 5, child: _renderDescriptionImage()),
           Expanded(flex: 4, child: _renderLoginUI(context))
         ],
       ),
@@ -43,7 +46,7 @@ class AuthUI extends BaseView<AuthController> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        // padding: EdgeInsets.symmetric(horizontal: extraLargePadding * 2),
+        padding: EdgeInsets.all(extraLargePadding * 2),
         height: double.infinity,
         decoration: BoxDecoration(
           color: AppColors.primary.withOpacity(0.08),
@@ -99,22 +102,39 @@ class AuthUI extends BaseView<AuthController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppLogo(),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Welcome to ${AppConfigs.appName}!",
-                            style: Get.theme.textTheme.headlineSmall?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SvgPicture.asset(
+
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: "Welcome to ${AppConfigs.appName}!",
+                          style: Get.theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        WidgetSpan(
+                          child: SvgPicture.asset(
                             AppImages.wave,
                             width: 32,
                             // height: 24.w,
                           ),
-                        ],
-                      ),
+                        )
+                      ])),
+                      // Row(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Expanded(
+                      //       child: Text(
+                      //         "Welcome to ${AppConfigs.appName}!",
+                      //         style: Get.theme.textTheme.headlineSmall?.copyWith(
+                      //           fontWeight: FontWeight.w600,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SvgPicture.asset(
+                      //       AppImages.wave,
+                      //       width: 32,
+                      //       // height: 24.w,
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(height: halfPadding),
                       Text(
                         "Please sign-in to your account and start the adventure",
@@ -148,6 +168,7 @@ class AuthUI extends BaseView<AuthController> {
             hintText: "Enter your email or username",
             onChanged: (v) {},
             iconPrefix: const Icon(AppIcons.user),
+            obscureText: false,
             validator: (p0) {
               return Validator().notEmpty(p0, 'username');
             },
@@ -174,7 +195,7 @@ class AuthUI extends BaseView<AuthController> {
           PrimaryButton(
             labelText: "Sign in",
             onPressed: () {
-              controller.signin();
+              controller.signIn();
             },
             width: getSizeResponsive(defaultSize: 150),
           )

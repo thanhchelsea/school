@@ -107,7 +107,7 @@ class _AppTextFieldState extends State<AppTextField> {
             onFieldSubmitted: (value) {},
             onChanged: (v) {},
             keyboardType: widget.keyboardType,
-            obscureText: widget.obscureText ? showText : true,
+            obscureText: widget.obscureText ? showText : false,
             maxLines: 1,
             validator: (v) {
               return widget.validator!(v);

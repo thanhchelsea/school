@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:school_manager/utils/index.dart';
 import '../repositories/exceptions/index.dart';
 
 enum PageState {
@@ -74,48 +75,48 @@ abstract class BaseController extends GetxController {
     if (onStart != null) onStart();
     showLoading();
 
-    // try {
-    final T response = await future;
+    try {
+      final T response = await future;
 
-    if (onSuccess != null) onSuccess(response);
+      if (onSuccess != null) onSuccess(response);
 
-    onComplete == null ? hideLoading() : onComplete();
+      onComplete == null ? hideLoading() : onComplete();
 
-    return response;
-    // } on ServiceUnavailableException catch (exception) {
-    //   _exception = exception;
-    //   showErrorMessage(exception.message);
-    // } on UnauthorizedException catch (exception) {
-    //   _exception = exception;
-    //   showErrorMessage(exception.message);
-    // } on TimeoutException catch (exception) {
-    //   _exception = exception;
-    //   showErrorMessage(exception.message);
-    // } on NetworkException catch (exception) {
-    //   _exception = exception;
-    //   showErrorMessage(exception.message);
-    // } on JsonFormatException catch (exception) {
-    //   _exception = exception;
-    //   showErrorMessage(exception.message);
-    // } on NotFoundException catch (exception) {
-    //   _exception = exception;
-    //   showErrorMessage(exception.message);
-    // } on ApiException catch (exception) {
-    //   _exception = exception;
-    // } on AppException catch (exception) {
-    //   _exception = exception;
-    //   if (exception.message == Configs.LOGIN_NOT_EXISTED.toString()) {
-    //     showErrorMessage("Vui lòng đăng nhập lại <3.");
-    //     Get.offAllNamed(RouterNames.SIGN_IN);
-    //   } else {
-    //     showErrorMessage(exception.message);
-    //   }
-    // } catch (error) {
-    //   _exception = AppException(message: "$error");
-    //   Logger().e("Controller>>>>>> error $error");
-    // }
+      return response;
+    } on ServiceUnavailableException catch (exception) {
+      _exception = exception;
+      showErrorMessage(exception.message);
+    } on UnauthorizedException catch (exception) {
+      _exception = exception;
+      showErrorMessage(exception.message);
+    } on TimeoutException catch (exception) {
+      _exception = exception;
+      showErrorMessage(exception.message);
+    } on NetworkException catch (exception) {
+      _exception = exception;
+      showErrorMessage(exception.message);
+    } on JsonFormatException catch (exception) {
+      _exception = exception;
+      showErrorMessage(exception.message);
+    } on NotFoundException catch (exception) {
+      _exception = exception;
+      showErrorMessage(exception.message);
+    } on ApiException catch (exception) {
+      _exception = exception;
+    } on AppException catch (exception) {
+      _exception = exception;
+      if (exception.message == AppConfigs.LOGIN_NOT_EXISTED.toString()) {
+        showErrorMessage("Vui lòng đăng nhập lại <3.");
+        // Get.offAllNamed(RouterNames.SIGN_IN);
+      } else {
+        showErrorMessage(exception.message);
+      }
+    } catch (error) {
+      _exception = AppException(message: "$error");
+      Logger().e("Controller>>>>>> error $error");
+    }
 
-    // if (onError != null) onError(_exception);
+    if (onError != null) onError(_exception);
 
     onComplete == null ? hideLoading() : onComplete();
   }
