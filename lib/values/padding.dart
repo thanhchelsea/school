@@ -12,5 +12,7 @@ double get padding18 => 18;
 double get padding20 => 20;
 double get largePadding => 24;
 double get extraLargePadding => 32;
+double get padding64 => 64;
+double get padding128 => 123;
 
 double get buttonVerticalPadding => 16;

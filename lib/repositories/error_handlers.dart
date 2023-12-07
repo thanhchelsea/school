@@ -42,9 +42,8 @@ Exception _parseDioErrorResponse(DioError dioError) {
     status = dioError.response?.data["status"];
     serverMessage = dioError.response?.data["message"];
   } catch (e, s) {
-    logger.i("$e");
+    logger.i("$e  $statusCode");
     logger.i(s.toString());
-
     serverMessage = "Something went wrong. Please try again later.";
   }
 
@@ -53,6 +52,7 @@ Exception _parseDioErrorResponse(DioError dioError) {
       return ServiceUnavailableException("Service Temporarily Unavailable");
     case HttpStatus.notFound:
       return NotFoundException(serverMessage ?? "", status ?? "");
+
     default:
       return ApiException(httpCode: statusCode, status: status ?? "", message: serverMessage ?? "");
   }

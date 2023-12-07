@@ -2,6 +2,8 @@ import 'package:get_storage/get_storage.dart';
 import 'preference_manager.dart';
 
 class PreferenceImpl implements PreferenceManager {
+  static const keyTheme = "theme";
+  static const sessionId = "sessionId";
   final _storage = GetStorage();
 
   @override

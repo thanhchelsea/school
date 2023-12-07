@@ -4,19 +4,20 @@ import 'package:school_manager/utils/index.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'routes/app_routers.dart';
+import 'screens/auth/controller.dart';
 import 'screens/settings.dart/controller.dart';
 import 'values/app_theme.dart';
 
 void main() async {
   Get.lazyPut(() => LanguageController(), fenix: true);
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(AuthController(), permanent: true);
 
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.light,
           initialRoute: RouterNames.AUTH,
           getPages: AppRoutes.routes,
+          unknownRoute: GetPage(name: '/notfound', page: () => Text("notfound")),
         );
       },
     );

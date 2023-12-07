@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:school_manager/utils/index.dart';
+import 'package:school_manager/values/index.dart';
 import '../repositories/exceptions/index.dart';
 
 enum PageState {
@@ -103,6 +105,7 @@ abstract class BaseController extends GetxController {
       showErrorMessage(exception.message);
     } on ApiException catch (exception) {
       _exception = exception;
+      showErrorMessage(exception.message);
     } on AppException catch (exception) {
       _exception = exception;
       if (exception.message == AppConfigs.LOGIN_NOT_EXISTED.toString()) {
@@ -123,10 +126,40 @@ abstract class BaseController extends GetxController {
 
   showErrorSnackBar(String message) {
     final snackBar = SnackBar(
-        content: Text(
-      message,
-      style: TextStyle(color: Colors.white),
-    ));
+      behavior: SnackBarBehavior.floating,
+      elevation: 0,
+      backgroundColor: Colors.white.withOpacity(0),
+      content: Row(
+        // mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 350,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.error,
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x19000000),
+                  spreadRadius: 2.0,
+                  blurRadius: 8.0,
+                  offset: Offset(2, 4),
+                )
+              ],
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(Icons.error, color: Colors.white),
+                SizedBox(width: padding),
+                Expanded(child: Text(message, style: const TextStyle(color: Colors.white))),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(snackBar);
     });

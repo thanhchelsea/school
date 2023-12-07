@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:school_manager/values/index.dart';
 
 import 'index.dart';
+import 'responsive_layout.dart';
 
 abstract class BaseView<Controller extends BaseController> extends GetView<Controller> {
   // final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
 
-  Widget body(BuildContext context);
+  ResponsiveLayout body(BuildContext context);
   PreferredSizeWidget? appBar(BuildContext context);
 
   @override
@@ -62,7 +64,12 @@ abstract class BaseView<Controller extends BaseController> extends GetView<Contr
       bottom: false,
       child: Container(
         width: Get.width,
-        decoration: const BoxDecoration(),
+        decoration: BoxDecoration(
+            gradient: RadialGradient(
+          colors: [AppColors.primary.withOpacity(0.05), AppColors.white.withOpacity(0.1)],
+          center: Alignment(-1.0, 1.0),
+          radius: 1,
+        )),
         child: SizedBox(height: Get.height, child: body(context)),
       ),
     );

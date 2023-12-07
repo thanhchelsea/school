@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school_manager/tools/text_style.dart';
 import 'package:school_manager/values/index.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -75,7 +76,10 @@ class PrimaryButton extends StatelessWidget {
         ),
         child: titleWidget ??
             Container(
-              padding: padding ?? EdgeInsets.symmetric(vertical: 14),
+              padding: padding ??
+                  EdgeInsets.symmetric(
+                      vertical: getSizeResponsive(
+                          defaultSize: GetPlatform.isMobile ? 16 : 14, mobileSize: 16, desktopSize: 14)),
               // width: double.infinity,
               child: Text(
                 labelText,

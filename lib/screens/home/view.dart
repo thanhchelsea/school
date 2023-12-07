@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/preferred_size.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
 import 'package:school_manager/base/index.dart';
 import 'package:school_manager/screens/home/controller.dart';
+import 'package:school_manager/screens/home/desktop_ui.dart';
+import 'package:school_manager/screens/home/mobile_ui.dart';
 import 'package:school_manager/tools/text_style.dart';
+
+import '../../base/responsive_layout.dart';
 
 class HomeUI extends BaseView<HomeController> {
   @override
@@ -13,11 +14,10 @@ class HomeUI extends BaseView<HomeController> {
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Center(
-      child: Text(
-        "Home",
-      ),
+  ResponsiveLayout body(BuildContext context) {
+    return ResponsiveLayout(
+      mobileUI: HomeUIMobile(),
+      desktopUI: HomeDesktopUI(),
     );
   }
 }
