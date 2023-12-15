@@ -40,6 +40,10 @@ class User {
     required this.roles,
   });
 
+  String getFullName() {
+    return "${firstName} ${lastName}";
+  }
+
   User copyWith({
     String? username,
     String? firstName,

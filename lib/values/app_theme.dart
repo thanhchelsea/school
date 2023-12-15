@@ -8,6 +8,7 @@ class AppThemes {
   ///Config ThemeData For LightMode
   static ThemeData lightTheme(BuildContext context) {
     final baseTheme = ThemeData.light();
+
     // TextTheme textTheme = getTextTheme(baseTheme.textTheme, context)..apply(fontSizeFactor: 1);
     return ThemeData(
       // textTheme: textTheme,
@@ -31,7 +32,7 @@ class AppThemes {
         color: Colors.black,
       ),
       checkboxTheme: CheckboxThemeData(),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: Color(0xfffafafc),
       dividerTheme: const DividerThemeData(
         thickness: 1.0,
         color: Color(0xFFEAF0FD),
@@ -43,12 +44,14 @@ class AppThemes {
         // titleTextStyle: textTheme.subtitle2,
         iconTheme: const IconThemeData(color: Color(0xFF212633)),
       ),
+
       highlightColor: AppColors.primary,
       colorScheme: const ColorScheme.light().copyWith(
         secondary: AppColors.secondary,
         tertiary: AppColors.tertiary,
         background: AppColors.background,
         primary: AppColors.primary,
+        primaryContainer: Color(0xffcfe2f5), //mau khong dc helight
         shadow: Colors.black12,
         error: Colors.red,
       ),

@@ -76,7 +76,7 @@ class _AppTextFieldState extends State<AppTextField> {
           TextFormField(
             enabled: widget.enable,
             onTap: () {},
-            style: TextStyle(fontSize: widget.fontSize ?? getSizeResponsive(defaultSize: 12)),
+            style: TextStyle(fontSize: widget.fontSize ?? getSizeResponsive(defaultSize: 12, context: context)),
             decoration: InputDecoration(
               // fillColor: ,
               filled: true,

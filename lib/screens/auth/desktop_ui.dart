@@ -14,7 +14,6 @@ class AuthDesktopUI extends StatelessWidget {
   AuthController controller;
   @override
   Widget build(BuildContext context) {
-    print(ResponsiveBreakpoints.of(context).breakpoint);
     bool check = ResponsiveBreakpoints.of(context).smallerThan(DESKTOP);
     return Container(
       padding: EdgeInsets.only(left: extraLargePadding, top: extraLargePadding, bottom: extraLargePadding),
@@ -26,14 +25,19 @@ class AuthDesktopUI extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          check ? Container() : Expanded(flex: 5, child: _renderDescriptionImage()),
+          check
+              ? Container()
+              : Expanded(
+                  flex: 5,
+                  child: _renderDescriptionImage(context),
+                ),
           Expanded(flex: 4, child: _renderLoginUI(context))
         ],
       ),
     );
   }
 
-  Widget _renderDescriptionImage() {
+  Widget _renderDescriptionImage(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
@@ -63,7 +67,7 @@ class AuthDesktopUI extends StatelessWidget {
                 ),
                 child: Image(
                   image: const AssetImage(AppImages.eLearning),
-                  width: getSizeResponsive(defaultSize: 500),
+                  width: getSizeResponsive(defaultSize: 500, context: context),
                 ),
               ),
             ],
@@ -164,7 +168,12 @@ class AuthDesktopUI extends StatelessWidget {
               return Validator().notEmpty(p0, 'username');
             },
             width: getSizeResponsive(
-                context: context, defaultSize: 220, mobileSize: 220, tabletSize: 350, desktopSize: 350),
+              context: context,
+              defaultSize: 220,
+              mobileSize: 220,
+              tabletSize: 350,
+              desktopSize: 350,
+            ),
           ),
           SizedBox(height: 12),
           AppTextField(
@@ -188,7 +197,7 @@ class AuthDesktopUI extends StatelessWidget {
             onPressed: () {
               controller.signIn();
             },
-            width: getSizeResponsive(defaultSize: 150),
+            width: getSizeResponsive(defaultSize: 150, context: context),
           )
         ],
       ),

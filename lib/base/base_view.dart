@@ -1,8 +1,12 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:school_manager/values/index.dart';
+import 'package:school_manager/widgets/index.dart';
 
 import 'index.dart';
 import 'responsive_layout.dart';
@@ -39,11 +43,44 @@ abstract class BaseView<Controller extends BaseController> extends GetView<Contr
 
   Widget pageScaffold(BuildContext context) {
     return Scaffold(
+      body: ZoomDrawer(
+        controller: controller.zoomDrawerController,
+        menuScreen: DrawerApp(),
+        mainScreenScale: 0.1,
+
+        mainScreenTapClose: true,
+        disableDragGesture: true,
+        mainScreen: Scaffold(
+          //sets ios status bar color
+          // backgroundColor: Colors.transparent,
+          // key: UniqueKey(),
+          appBar: appBar(context),
+          drawerEnableOpenDragGesture: false,
+          body: Stack(
+            children: [
+              pageContent(context),
+              Obx(() {
+                return controller.pageState == PageState.LOADING ? _showLoading() : Container();
+              }),
+            ],
+          ),
+          drawer: drawer(),
+        ),
+        borderRadius: 24.0,
+        showShadow: true,
+        angle: 0,
+        // menuBackgroundColor: Get.theme.colorScheme.secondary,
+        drawerShadowsBackgroundColor: Color.fromARGB(255, 209, 201, 241),
+        slideWidth: MediaQuery.of(context).size.width * .65,
+        openCurve: Curves.fastOutSlowIn,
+        // closeCurve: Curves.bounceIn,
+      ),
+    );
+    return Scaffold(
       //sets ios status bar color
-      backgroundColor: pageBackgroundColor(),
+      // backgroundColor: Colors.transparent,
       // key: UniqueKey(),
       appBar: appBar(context),
-      floatingActionButton: floatingActionButton(),
       drawerEnableOpenDragGesture: false,
       body: Stack(
         children: [
@@ -53,7 +90,6 @@ abstract class BaseView<Controller extends BaseController> extends GetView<Contr
           }),
         ],
       ),
-      bottomNavigationBar: bottomNavigationBar(),
       drawer: drawer(),
     );
   }
@@ -64,12 +100,6 @@ abstract class BaseView<Controller extends BaseController> extends GetView<Contr
       bottom: false,
       child: Container(
         width: Get.width,
-        decoration: BoxDecoration(
-            gradient: RadialGradient(
-          colors: [AppColors.primary.withOpacity(0.05), AppColors.white.withOpacity(0.1)],
-          center: Alignment(-1.0, 1.0),
-          radius: 1,
-        )),
         child: SizedBox(height: Get.height, child: body(context)),
       ),
     );
@@ -88,11 +118,10 @@ abstract class BaseView<Controller extends BaseController> extends GetView<Contr
   }
 
   Widget? floatingActionButton() {
-    return null;
-  }
-
-  Widget? bottomNavigationBar() {
-    return null;
+    return FloatingActionButton(
+      onPressed: () {},
+      //params
+    );
   }
 
   Widget? drawer() {
@@ -101,14 +130,16 @@ abstract class BaseView<Controller extends BaseController> extends GetView<Contr
 
   Widget _showLoading() {
     return Stack(
-      // ignore: prefer_const_literals_to_create_immutables
       children: [
-        const ModalBarrier(
-          // color: Colors.black12.withOpacity(0.05),
+        ModalBarrier(
           dismissible: false,
+          color: Colors.black12.withOpacity(0.02),
         ),
-        const Center(
-          child: CircularProgressIndicator(),
+        Center(
+          child: LoadingAnimationWidget.dotsTriangle(
+            color: Get.theme.primaryColor,
+            size: 45,
+          ),
         ),
       ],
     );

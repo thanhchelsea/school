@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:school_manager/utils/index.dart';
 
 class ClientUltis {
@@ -46,5 +47,14 @@ class ClientUltis {
         }
     }
     return message;
+  }
+}
+
+mixin Utils {
+  /// date to string format :25 June, 2023
+  String dateToString(DateTime dateTime) {
+    String date = "";
+    date = DateFormat('dd MMMM, yyyy', 'en_US').format(dateTime);
+    return date;
   }
 }

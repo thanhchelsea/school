@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class AppColors {
-  static const Color primary = Color(0xff8071f2); //màu chính
+  static const Color primary = Color(0xff8a77fe); //màu chính
   static const Color secondary = Color(0xfff08e21); //màu thứ cấp
   static const Color tertiary = Color(0xfff08e21); //màu bậc ba
   static const Color body = Color(0xffB3B3B4); //dành cho nội dung mô tả
@@ -16,4 +16,9 @@ class AppColors {
   static const Color grey = Color(0xff808080); //sắc độ trung tính
   static const Color background = Color(0xffFFFFFF); //màu nền
 //product-specific custom colors....
+
+  static const Color background1 = Color(0xff54b1ff); //màu nền
+  static const Color background2 = Color(0xfffcbd73); //màu nền
+  static const Color background3 = Color(0xff5ad891); //màu nền
+  static const Color background4 = Color(0xfff94a74); //màu nền
 }

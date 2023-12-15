@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiConfig {
-  static const apiEndPoint = "https://7f07-2402-800-6105-bc23-9957-33a2-a75f-4e4d.ngrok-free.app/api/app/";
+  static const apiEndPoint = "https://188f-2402-800-6105-da2d-6848-7ecf-a70c-80a4.ngrok-free.app/api/app/";
   static const TOKEN = "LAQaifUvHUWMCln8ve0VmnVaMCQrKIZS";
 }
 

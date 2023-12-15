@@ -4,6 +4,8 @@ import 'preference_manager.dart';
 class PreferenceImpl implements PreferenceManager {
   static const keyTheme = "theme";
   static const sessionId = "sessionId";
+  static const roles = "roles";
+
   final _storage = GetStorage();
 
   @override

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:school_manager/utils/index.dart';
@@ -23,6 +24,13 @@ enum PageState {
 
 abstract class BaseController extends GetxController {
 //language
+
+  final zoomDrawerController = ZoomDrawerController();
+  void toggleDrawer() {
+    print("Toggle drawer");
+    zoomDrawerController.toggle?.call();
+    update();
+  }
 
   final logoutController = false.obs;
 

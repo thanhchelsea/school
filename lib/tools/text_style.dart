@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' as GetX;
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_value.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///1:Display hoặc Headline hoặc title Text (headline1, headline2, ...):
 ///Sử dụng cho các tiêu đề lớn, quan trọng, thu hút sự chú ý.
@@ -82,12 +83,12 @@ double getSizeResponsive({
   var size = ResponsiveValue<double>(
         context ?? GetX.Get.context!,
         conditionalValues: [
-          Condition.equals(name: MOBILE, value: mobileSize),
-          Condition.equals(name: TABLET, value: tabletSize),
-          Condition.equals(name: DESKTOP, value: desktopSize),
-          Condition.largerThan(name: DESKTOP, value: desktopSize),
+          Condition.equals(name: MOBILE, value: mobileSize?.w ?? mobileSize),
+          Condition.equals(name: TABLET, value: tabletSize?.w ?? tabletSize),
+          Condition.equals(name: DESKTOP, value: desktopSize?.w ?? desktopSize),
+          Condition.largerThan(name: DESKTOP, value: desktopSize?.w ?? desktopSize),
         ],
-        defaultValue: defaultSize,
+        defaultValue: defaultSize.w,
       ).value ??
       0;
   return size;

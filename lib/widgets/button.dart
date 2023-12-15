@@ -78,8 +78,13 @@ class PrimaryButton extends StatelessWidget {
             Container(
               padding: padding ??
                   EdgeInsets.symmetric(
-                      vertical: getSizeResponsive(
-                          defaultSize: GetPlatform.isMobile ? 16 : 14, mobileSize: 16, desktopSize: 14)),
+                    vertical: getSizeResponsive(
+                      defaultSize: GetPlatform.isMobile ? 16 : 14,
+                      mobileSize: 16,
+                      desktopSize: 14,
+                      context: context,
+                    ),
+                  ),
               // width: double.infinity,
               child: Text(
                 labelText,

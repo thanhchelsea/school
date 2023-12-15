@@ -102,14 +102,14 @@ class AuthMobileUI extends StatelessWidget {
                 return Validator().notEmpty(p0, "password");
               },
             ),
-            _renderAction(),
+            _renderAction(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _renderAction() {
+  Widget _renderAction(BuildContext context) {
     return Container(
       width: double.infinity,
       child: Column(
@@ -124,7 +124,7 @@ class AuthMobileUI extends StatelessWidget {
               onPressed: () {
                 controller.signIn();
               },
-              width: getSizeResponsive(defaultSize: 150),
+              width: getSizeResponsive(defaultSize: 150, context: context),
             ),
           )
         ],

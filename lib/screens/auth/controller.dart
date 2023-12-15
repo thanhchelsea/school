@@ -11,20 +11,15 @@ class AuthController extends BaseController {
   TextEditingController usernameTextEditCtrl = TextEditingController();
   TextEditingController passwordTextEditCtrl = TextEditingController();
   ServerRepository serverRepo = ServerRepository();
-  PreferenceImpl _store = PreferenceImpl();
+  final PreferenceImpl _store = PreferenceImpl();
   Rxn<User?> user = Rxn<User?>();
   String x = "1";
   @override
   void onReady() async {
-    // TODO: implement onReady
-    // checkLogin();
     super.onReady();
   }
 
   void signIn() async {
-    x = "2";
-    Get.toNamed(RouterNames.HOME);
-    return;
     if (formKey.currentState!.validate()) {
       var signIn = serverRepo.signIn(
         username: usernameTextEditCtrl.text.trim(),
@@ -35,14 +30,45 @@ class AuthController extends BaseController {
         onSuccess: (response) {
           user.value = response as User;
           _store.writeStore(key: PreferenceImpl.sessionId, value: user.value!.sessionId);
-          print(user.value?.toJson());
+          Get.offAllNamed(RouterNames.HOME);
         },
       );
     }
   }
 
-  void checkLogin() async {
+  Future<bool> checkLogin() async {
     String sessionId = await _store.readStore(key: PreferenceImpl.sessionId) ?? "";
-    print("ssid: $sessionId");
+    if (sessionId.isNotEmpty) {
+      var signInWithSSid = serverRepo.signInWithSessionId(
+        sessionId: sessionId,
+      );
+      await callDataService(
+        signInWithSSid,
+        onSuccess: (response) {
+          if (response != null) {
+            print("Check login oke: <3");
+            user.value = response;
+            usernameTextEditCtrl.clear();
+            passwordTextEditCtrl.clear();
+            return true;
+          } else {
+            Get.offAllNamed(RouterNames.AUTH);
+          }
+        },
+        onError: (exception) {
+          if (Get.currentRoute != RouterNames.AUTH) {
+            Get.offAllNamed(RouterNames.AUTH);
+          }
+        },
+      );
+    } else {
+      Get.offAllNamed(RouterNames.AUTH);
+    }
+    return false;
+  }
+
+  Future signOut() async {
+    await _store.remove(PreferenceImpl.sessionId);
+    Get.offAllNamed(RouterNames.AUTH);
   }
 }
